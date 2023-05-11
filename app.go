@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"github.com/robfig/cron/v3"
 	"github.com/syndtr/goleveldb/leveldb"
 	"html/template"
 	"jyksServer/common"
@@ -13,7 +15,32 @@ import (
 	"strconv"
 )
 
+type MyJob struct{}
+
+func (j MyJob) Run() {
+	fmt.Println("执行")
+}
+
+func newWithSeconds() *cron.Cron {
+	secondParser := cron.NewParser(cron.Second | cron.Minute |
+		cron.Hour | cron.Dom | cron.Month | cron.DowOptional | cron.Descriptor)
+	return cron.New(cron.WithParser(secondParser), cron.WithChain())
+}
+
 func main() {
+
+	c := newWithSeconds()
+	spec := "*/5 * * * * ?"
+	//_, e := c.AddFunc(spec, func() {
+	//	fmt.Println("定时任务")
+	//})
+	_, e := c.AddJob(spec, MyJob{})
+	if e != nil {
+		fmt.Println("error:", e)
+	}
+	c.Start()
+
+	//select {}	// 强制阻塞
 
 	if os.Getenv("GIN_MODE") != "debug" {
 		gin.SetMode(gin.ReleaseMode)

@@ -8,6 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/google/uuid v1.3.0
 	github.com/jinzhu/gorm v1.9.16
+	github.com/robfig/cron/v3 v3.0.1
 	github.com/syndtr/goleveldb v1.0.0
 	gopkg.in/ini.v1 v1.67.0
 )
