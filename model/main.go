@@ -22,7 +22,6 @@ func InitDB() (*gorm.DB, error) {
 	db.LogMode(true) // 打印sql
 	if err == nil {
 		DB = db
-		db.AutoMigrate(&File{})
 		db.AutoMigrate(&User{})
 		createAdminAccount()
 		return DB, err
