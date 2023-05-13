@@ -46,6 +46,12 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	// Initialize Redis
+	err := common.InitRedisClient()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	// 初始化 MySQL
 	db, err := model.InitDB()
 	if err != nil {

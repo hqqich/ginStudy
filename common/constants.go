@@ -8,6 +8,7 @@ import (
 	"gopkg.in/ini.v1"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 )
 
@@ -29,8 +30,8 @@ var (
 )
 
 var (
-	GlobalApiRateLimit = 20
-	GlobalWebRateLimit = 60
+	GlobalApiRateLimit = 60
+	GlobalWebRateLimit = 60 //60s，允许多少次
 	DownloadRateLimit  = 10
 	CriticalRateLimit  = 3
 )
@@ -83,6 +84,7 @@ func init() {
 
 var (
 	DataSource string
+	RedisStr   string
 )
 
 func initConfig() {
@@ -94,6 +96,8 @@ func initConfig() {
 
 	// 读取指定 section 的指定 key 的值
 	DataSource = cfg.Section("system").Key("dataSource").String()
-	//distPath = cfg.Section("system").Key("distPath").String()
-	//port, _ = strconv.Atoi(cfg.Section("system").Key("port").String())
+	RedisStr = cfg.Section("system").Key("redisStr").String()
+	_, _ = strconv.Atoi(cfg.Section("system").Key("port").String())
+
+	fmt.Println("aa")
 }

@@ -10,9 +10,8 @@ func GetKey(key string) string {
 
 	var m map[string]interface{}
 	m = make(map[string]interface{})
-	m["name"] = "韩信"
-	m["age"] = 23
-	m["address"] = "野区"
+	m["str"] = "string"
+	m["int"] = 100
 	userJson, _ := json.Marshal(m)
 	LevelDB.Put([]byte(key), userJson, nil)
 	value, _ := LevelDB.Get([]byte(key), nil)

@@ -3,12 +3,15 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"jyksServer/controller"
+	"jyksServer/middleware"
 )
 
 func setWebRouter(router *gin.Engine) {
-	//router.Use(middleware.GlobalWebRateLimit())
+	router.Use(middleware.GlobalWebRateLimit())
 	// Always available
 	router.GET("/", controller.GetIndexPage)
+	router.POST("/login", middleware.CriticalRateLimit(), controller.Login)
+	router.GET("/logout", controller.Logout)
 
 	/*// Download files
 	fileDownloadAuth := router.Group("/")

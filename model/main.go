@@ -23,6 +23,8 @@ func InitDB() (*gorm.DB, error) {
 	if err == nil {
 		DB = db
 		db.AutoMigrate(&File{})
+		db.AutoMigrate(&User{})
+		createAdminAccount()
 		return DB, err
 	} else {
 		log.Fatal(err)
@@ -43,4 +45,16 @@ func InitLevelDB() (*leveldb.DB, error) {
 	}
 
 	return nil, err
+}
+
+// 初始化用户
+func createAdminAccount() {
+	var user User
+	DB.Where(User{Role: common.RoleAdminUser}).Attrs(User{
+		Username:    "hqqich",
+		Password:    "123456",
+		Role:        common.RoleAdminUser,
+		Status:      common.UserStatusEnabled,
+		DisplayName: "Administrator",
+	}).FirstOrCreate(&user)
 }

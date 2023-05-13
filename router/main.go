@@ -12,10 +12,9 @@ import (
 func SetRouter(router *gin.Engine) {
 	store := cookie.NewStore([]byte(common.SessionSecret))
 	// 使用Cookies
-	router.Use(sessions.Sessions("goFile", store))
+	router.Use(sessions.Sessions("jyksServer", store))
 
 	setWebRouter(router)
-	//setApiRouterV1(router)
-	setApiRouterMy(router)
+	setApiRouterV1(router)
 	router.NoRoute(controller.Get404Page)
 }
