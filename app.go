@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
+	"ginStudy/common"
+	"ginStudy/model"
+	"ginStudy/router"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/robfig/cron/v3"
 	"github.com/syndtr/goleveldb/leveldb"
 	"html/template"
-	"jyksServer/common"
-	"jyksServer/model"
-	"jyksServer/router"
 	"log"
 	"os"
 	"strconv"

@@ -1,4 +1,4 @@
-module jyksServer
+module ginStudy
 
 go 1.18
 

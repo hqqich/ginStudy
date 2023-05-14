@@ -1,18 +1,21 @@
 package router
 
 import (
+	"ginStudy/common"
+	"ginStudy/controller"
+	"ginStudy/middleware"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"jyksServer/common"
-	"jyksServer/controller"
 )
 
 // SetRouter 绑定路由
 func SetRouter(router *gin.Engine) {
 	store := cookie.NewStore([]byte(common.SessionSecret))
 	// 使用Cookies
-	router.Use(sessions.Sessions("jyksServer", store))
+	router.Use(sessions.Sessions("ginStudy", store))
+	// 使用后端跨域
+	router.Use(middleware.CORSMiddleware())
 
 	setWebRouter(router)
 	setApiRouterV1(router)

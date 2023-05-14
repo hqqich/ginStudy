@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"ginStudy/common"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"jyksServer/common"
 	"net/http"
 )
 

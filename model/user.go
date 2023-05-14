@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// sqlite entity
 //type User struct {
 //	Id          int    `json:"id"`
 //	Username    string `json:"username" gorm:"unique;type:string"`
@@ -57,7 +58,7 @@ func (user *User) Validate() bool {
 	username := user.Username
 	//password := user.Password
 
-	contains := strings.Contains(username, "hqqich") || strings.Contains(username, "tsinglink")
+	contains := strings.Contains(username, "admin") || strings.Contains(username, "tsinglink")
 
 	return contains
 }

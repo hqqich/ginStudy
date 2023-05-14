@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"ginStudy/common"
+	"ginStudy/model"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"jyksServer/common"
-	"jyksServer/model"
 	"net/http"
 )
 

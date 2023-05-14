@@ -1,8 +1,8 @@
 package model
 
 import (
+	"ginStudy/common"
 	"github.com/golang-jwt/jwt/v4"
-	"jyksServer/common"
 )
 
 // 获取jwt

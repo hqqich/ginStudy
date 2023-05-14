@@ -3,8 +3,8 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"ginStudy/common"
 	"github.com/gin-gonic/gin"
-	"jyksServer/common"
 	"net/http"
 	"time"
 )

@@ -1,4 +1,4 @@
-APP=jyksServer
+APP=ginStudy
 VERSION=0.0.1
 
 .PHONY: help all build windows linux

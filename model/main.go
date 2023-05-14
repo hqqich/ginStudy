@@ -1,11 +1,11 @@
 package model
 
 import (
+	"ginStudy/common"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/syndtr/goleveldb/leveldb"
-	"jyksServer/common"
 	"log"
 )
 
@@ -50,7 +50,7 @@ func InitLevelDB() (*leveldb.DB, error) {
 func createAdminAccount() {
 	var user User
 	DB.Where(User{Role: common.RoleAdminUser}).Attrs(User{
-		Username:    "hqqich",
+		Username:    "admin",
 		Password:    "123456",
 		Role:        common.RoleAdminUser,
 		Status:      common.UserStatusEnabled,
