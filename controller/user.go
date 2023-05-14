@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -8,6 +9,7 @@ import (
 	"jyksServer/model"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func Login(c *gin.Context) {
@@ -44,6 +46,60 @@ func Login(c *gin.Context) {
 		redirectUrl = "/"
 	}
 	c.Redirect(http.StatusFound, redirectUrl)
+	return
+}
+
+func LoginByToken(c *gin.Context) {
+
+	//使用map获取请求参数
+	var requestMap = make(map[string]string)
+	json.NewDecoder(c.Request.Body).Decode(&requestMap)
+
+	////使用结构体承接body参数
+	//var requestUser = model.User{}
+	//json.NewDecoder(c.Request.Body).Decode(&requestUser)
+	//
+	//
+	////gin框架提供的绑定参数
+	//var requestUser = model.User{}
+	//c.Bind(&requestUser)
+
+	user := model.User{
+		Username: requestMap["username"],
+		Password: requestMap["password"],
+	}
+
+	validate := user.Validate() // 验证是否包含特殊字符
+	user.ValidateAndFill()
+	if user.Status != common.UserStatusEnabled || !validate {
+		c.HTML(http.StatusForbidden, "login.html", gin.H{
+			"message": "用户名或密码错误，或者该用户已被封禁",
+			"option":  common.OptionMap,
+		})
+		return
+	}
+
+	// 生成token,写到redis
+	jwt := model.GetJwt(user)
+
+	ctx := context.Background()
+	rdb := common.RDB
+
+	marshal, _ := json.Marshal(user)
+	err := rdb.Set(ctx, "token:"+jwt, marshal, time.Duration(60*time.Second)).Err()
+	if err != nil {
+		panic(err)
+	}
+
+	//val, err := rdb.Get(ctx, "key").Result()
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	c.JSON(200, gin.H{
+		"code": 1,
+		"data": jwt,
+	})
 	return
 }
 

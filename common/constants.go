@@ -71,8 +71,10 @@ func init() {
 }
 
 var (
-	DataSource string
-	RedisStr   string
+	DataSource    string
+	RedisStr      string
+	JwtSecret     string
+	JwtSecretByte []byte
 )
 
 func initConfig() {
@@ -85,6 +87,11 @@ func initConfig() {
 	// 读取指定 section 的指定 key 的值
 	DataSource = cfg.Section("system").Key("dataSource").String()
 	RedisStr = cfg.Section("system").Key("redisStr").String()
+
+	// ===== 创建秘钥
+	JwtSecret = cfg.Section("system").Key("jwtSecret").String()
+	JwtSecretByte = []byte(JwtSecret)
+
 	_, _ = strconv.Atoi(cfg.Section("system").Key("port").String())
 
 	fmt.Println("aa")

@@ -16,5 +16,6 @@ func SetRouter(router *gin.Engine) {
 
 	setWebRouter(router)
 	setApiRouterV1(router)
+	setApiRouterV2(router)
 	router.NoRoute(controller.Get404Page)
 }

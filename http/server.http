@@ -1,0 +1,18 @@
+
+### 登陆，token方式
+POST http://127.0.0.1:80/loginByToken
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username" : "hqqich",
+  "password" : "123456"
+}
+
+###
+GET http://127.0.0.1:80/apiv2/myJson
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicGFzc3dvcmQiOiIxMjM0NTYiLCJyb2xlIjoxMCwidXNlcm5hbWUiOiJocXFpY2gifQ.pGLMC_hgK3vGpYzCTyi_ySK1UmL5QkJNqlZA_ov6wnw
+
+
+###
+GET http://127.0.0.1:80/apiv2/myJson

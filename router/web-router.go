@@ -8,9 +8,11 @@ import (
 
 func setWebRouter(router *gin.Engine) {
 	router.Use(middleware.GlobalWebRateLimit())
+	router.Use(middleware.CORSMiddleware())
 	// Always available
 	router.GET("/", controller.GetIndexPage)
 	router.POST("/login", middleware.CriticalRateLimit(), controller.Login)
+	router.POST("/loginByToken", middleware.CriticalRateLimit(), controller.LoginByToken)
 	router.GET("/logout", controller.Logout)
 
 	/*// Download files
