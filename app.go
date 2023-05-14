@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"time"
 )
 
 type MyJob struct{}
@@ -28,6 +29,9 @@ func newWithSeconds() *cron.Cron {
 }
 
 func main() {
+
+	// 休眠20s，等待mysql,redis启动
+	time.Sleep(time.Duration(20) * time.Second)
 
 	c := newWithSeconds()
 	spec := "*/5 * * * * ?"

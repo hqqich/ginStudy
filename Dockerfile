@@ -12,11 +12,11 @@ WORKDIR /app
 VOLUME ~/files /app/static
 
 # 将本机文件移动到docker工作目录
-COPY ./ginStudy-linux-amd64-64 /app
+COPY ./ginStudy-linux-amd64 /app
 COPY ./config.ini /app
 
 # 修改可执行文件权限
-RUN chmod 777 /app/ginStudy-linux-amd64-64
+RUN chmod 777 /app/ginStudy-linux-amd64
 
 # 指定端口，docker对外的端口
 EXPOSE 8888
@@ -25,4 +25,4 @@ EXPOSE 8888
 WORKDIR /app
 
 #需要运行的命令
-CMD ["/app/ginStudy-linux-amd64-64"]
+CMD ["/app/ginStudy-linux-amd64"]

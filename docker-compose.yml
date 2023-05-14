@@ -2,12 +2,13 @@
 version: '3.2'  #下面volumes需要我们版本version是3.2的才能使用
 services:
   redis:  #redis服务的名称，代码中连接时不能使用IP，用这个当域名，如：（Jedis jedis = new Jedis("redis", 6379)）
-    image: "redis:alpine"  #这里使用最小镜像的redis镜像
+    image: "redis:alpine3.18"  #这里使用最小镜像的redis镜像
+#    image: "redis:alpine"  # x64
     container_name: ginStudy-redis
     ports:
       - "6379:6379"
   mydb:
-    image: mysql:5.7
+    image: mysql:latest
     container_name: mydb
     environment:
       MYSQL_DATABASE: ginStudy
