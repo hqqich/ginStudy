@@ -1,0 +1,27 @@
+{
+	"name": "go",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": [
+		// "--privileged",
+		// "--privileged",
+		"--dns=114.114.114.114"
+		// "--network=network1"
+	],
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=remote-workspace,target=/workspace,type=volume",	// 这里要在docker-host中创建 volume: "docker volume create remote-workspace"
+	"remoteUser": "root",
+	"shutdownAction": "stopContainer",
+	"postCreateCommand": "git clone https://github.com/hqqich/ginStudy.git /workspace",
+	"customizations": {
+		"vscode": {
+			// 安装vscode插件
+			"extensions": [
+				"golang.Go",
+				"GitHub.copilot",
+				"zxh404.vscode-proto3"
+			]
+		}
+	}
+}
