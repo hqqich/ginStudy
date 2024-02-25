@@ -5,15 +5,16 @@ import (
 	"ginStudy/common"
 	"ginStudy/model"
 	"ginStudy/router"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
-	"github.com/robfig/cron/v3"
-	"github.com/syndtr/goleveldb/leveldb"
 	"html/template"
 	"log"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+	"github.com/robfig/cron/v3"
+	"github.com/syndtr/goleveldb/leveldb"
 )
 
 type MyJob struct{}
@@ -28,7 +29,7 @@ func newWithSeconds() *cron.Cron {
 	return cron.New(cron.WithParser(secondParser), cron.WithChain())
 }
 
-func main() {
+func startMain() {
 
 	// 休眠20s，等待mysql,redis启动
 	time.Sleep(time.Duration(20) * time.Second)
